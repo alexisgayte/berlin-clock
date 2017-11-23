@@ -41,6 +41,14 @@ public class BerlinDateFormatTest {
 	}
 
 	@Test
+	public void tenTenTenTest() throws ParseException {
+
+		String format = berlinClockTime.format(new Date(0, 0, 0, 10, 10, 10));
+
+		assertEquals("Y\nRROO\nOOOO\nYYOOOOOOOOO\nOOOO", format);
+	}
+
+	@Test
 	public void normalTwentyFourHourTest() throws ParseException {
 
 		String format = berlinClockTime.format(new Date(0, 0, 0, 24, 0, 0));
