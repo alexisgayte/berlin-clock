@@ -2,7 +2,9 @@ package com.ubs.opsit.interviews;
 
 import java.text.DateFormat;
 import java.text.FieldPosition;
+import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -21,28 +23,32 @@ public class BerlinDateFormat extends DateFormat {
 
 	public BerlinDateFormat(boolean pairDay24h) {
 		super();
+		setCalendar(Calendar.getInstance());
+		setNumberFormat(NumberFormat.getInstance());
 		pairDay24hLogic = pairDay24h;
+
 	}
 
 	@Override
 	public StringBuffer format(Date date, StringBuffer toAppendTo, FieldPosition fieldPosition) {
 
+		calendar.setTime(date);
 		// TODO need more story regarding the logic of 24H vs 00H which are
 		// different.
-		if (pairDay24hLogic && date.getDate() % 2 == 0) {
+		if (pairDay24hLogic && calendar.get(Calendar.DAY_OF_MONTH) % 2 == 0) {
 			return pairDay24hLogic(date, toAppendTo);
 		}
 
 		// Check it out if we can use the time lib and java >7
-		toAppendTo	.append(formatSecondsRow(date.getSeconds()))
+		toAppendTo	.append(formatSecondsRow(calendar.get(Calendar.SECOND)))
 					.append(System.lineSeparator())
-					.append(formatHours1Row(date.getHours()))
+					.append(formatHours1Row(calendar.get(Calendar.HOUR)))
 					.append(System.lineSeparator())
-					.append(formatHours2Row(date.getHours()))
+					.append(formatHours2Row(calendar.get(Calendar.HOUR)))
 					.append(System.lineSeparator())
-					.append(formatMinutes1Row(date.getMinutes()))
+					.append(formatMinutes1Row(calendar.get(Calendar.MINUTE)))
 					.append(System.lineSeparator())
-					.append(formatMinutes2Row(date.getMinutes()));
+					.append(formatMinutes2Row(calendar.get(Calendar.MINUTE)));
 		return toAppendTo;
 	}
 
@@ -53,19 +59,19 @@ public class BerlinDateFormat extends DateFormat {
 
 	private StringBuffer pairDay24hLogic(Date date, StringBuffer toAppendTo) {
 
-		return toAppendTo	.append(formatSecondsRow(date.getSeconds()))
+		return toAppendTo	.append(formatSecondsRow(calendar.get(Calendar.SECOND)))
 							.append(System.lineSeparator())
 							.append(formatHours1Row(HOUR_FOR_THE_24_LOGIC))
 							.append(System.lineSeparator())
 							.append(formatHours2Row(HOUR_FOR_THE_24_LOGIC))
 							.append(System.lineSeparator())
-							.append(formatMinutes1Row(date.getMinutes()))
+							.append(formatMinutes1Row(calendar.get(Calendar.MINUTE)))
 							.append(System.lineSeparator())
-							.append(formatMinutes2Row(date.getMinutes()));
+							.append(formatMinutes2Row(calendar.get(Calendar.MINUTE)));
 	}
 
 	private String formatSecondsRow(int seconds) {
-		return (seconds % 2 == 0)?"Y":"O";
+		return (seconds % 2 == 0) ? "Y" : "O";
 	}
 
 	private String formatHours1Row(int hour) {
