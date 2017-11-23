@@ -42,9 +42,9 @@ public class BerlinDateFormat extends DateFormat {
 		// Check it out if we can use the time lib and java >7
 		toAppendTo	.append(formatSecondsRow(calendar.get(Calendar.SECOND)))
 					.append(System.lineSeparator())
-					.append(formatHours1Row(calendar.get(Calendar.HOUR)))
+					.append(formatHours1Row(calendar.get(Calendar.HOUR_OF_DAY)))
 					.append(System.lineSeparator())
-					.append(formatHours2Row(calendar.get(Calendar.HOUR)))
+					.append(formatHours2Row(calendar.get(Calendar.HOUR_OF_DAY)))
 					.append(System.lineSeparator())
 					.append(formatMinutes1Row(calendar.get(Calendar.MINUTE)))
 					.append(System.lineSeparator())
