@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.NotImplementedException;
+
 public class BerlinClockTime implements TimeConverter {
 
 
@@ -18,8 +20,7 @@ public class BerlinClockTime implements TimeConverter {
     	} catch (ParseException e){
     		// TODO shall we need an exception system; if so we need to define it in the interface.
     		// TODO need to ask for more story.
-    		throw new RuntimeException();
-
+    		throw new NotImplementedException();
     	}
 
     	return berlinDateFormat.format(date);
