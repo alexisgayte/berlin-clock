@@ -65,10 +65,7 @@ public class BerlinDateFormat extends DateFormat {
 	}
 
 	private String formatSecondsRow(int seconds) {
-		if (seconds % 2 == 0)
-			return "Y";
-		else
-			return "O";
+		return (seconds % 2 == 0)?"Y":"O";
 	}
 
 	private String formatHours1Row(int hour) {
