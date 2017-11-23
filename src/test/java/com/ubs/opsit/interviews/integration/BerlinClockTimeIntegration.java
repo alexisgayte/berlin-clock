@@ -14,6 +14,7 @@ import com.ubs.opsit.interviews.TimeConverter;
 @RunWith(MockitoJUnitRunner.class)
 public class BerlinClockTimeIntegration {
 
+
 	TimeConverter timeConverter;
 
 	@Before
