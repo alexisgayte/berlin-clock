@@ -1,6 +1,7 @@
 package com.ubs.opsit.interviews.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -77,7 +78,6 @@ public class BerlinClockTimeTest {
 
 	}
 
-
 	@Test
 	public void normal_call_should_call_berlin_date_format_with_date_as_param_test() throws ParseException {
 
@@ -93,6 +93,25 @@ public class BerlinClockTimeTest {
 
 		verify(berlinDateFormat).format(captorDate.capture(), captorStringBuffer.capture(), captorFieldPosition.capture());
 		assertEquals("Date give as parameter to berlin date format is not as expected.", date, captorDate.getValue());
+
+	}
+
+	@Test
+	public void wrong_parameter_should_trigger_exception_test() throws ParseException {
+
+		// when
+
+		when(simpleDateFormat.parse(any())).thenThrow(new ParseException(dateParam, 0));
+		when(berlinDateFormat.format(Mockito.any(Date.class), any(), any())).thenReturn(new StringBuffer(dateParam));
+		// then
+		try{
+			berlinClockTime.convertTime(dateParam);
+			fail();
+		} catch (Exception e) {
+		}
+
+		// expect exception
+
 
 	}
 
