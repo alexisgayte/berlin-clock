@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.text.ParseException;
 import java.util.Date;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,5 +59,11 @@ public class BerlinDateFormatTest {
 		assertEquals("Y\nRRRR\nRRRR\nOOOOOOOOOOO\nOOOO", format);
 	}
 
+	@Test(expected = NotImplementedException.class)
+	public void parseTest() throws ParseException {
+
+		berlinClockTime.parse("Y\nRRRR\nRRRR\nOOOOOOOOOOO\nOOOO");
+
+	}
 
 }

@@ -2,6 +2,7 @@ package com.ubs.opsit.interviews.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,6 @@ import com.ubs.opsit.interviews.TimeConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BerlinClockTimeIntegration {
-
 
 	TimeConverter timeConverter;
 
@@ -31,7 +31,6 @@ public class BerlinClockTimeIntegration {
 
 	}
 
-
 	@Test
 	public void timeConverter24hTest() {
 		assertEquals(	"Y" + System.lineSeparator() +
@@ -40,6 +39,11 @@ public class BerlinClockTimeIntegration {
 						"OOOOOOOOOOO"+ System.lineSeparator() +
 						"OOOO", timeConverter.convertTime("24:00:00"));
 
+	}
+
+	@Test(expected = NotImplementedException.class)
+	public void timeConverterWrongFormatTest() {
+		timeConverter.convertTime("2400:0");
 	}
 
 }
