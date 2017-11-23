@@ -1,6 +1,7 @@
 package com.ubs.opsit.interviews.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -63,6 +64,25 @@ public class BerlinDateFormatTest {
 	public void parseTest() throws ParseException {
 
 		berlinClockTime.parse("Y\nRRRR\nRRRR\nOOOOOOOOOOO\nOOOO");
+
+	}
+
+	@Test
+	public void cloneTest() {
+
+		berlinClockTime = (BerlinDateFormat) berlinClockTime.clone();
+		String format = berlinClockTime.format(new Date(0,0,0,0,0,0));
+
+		assertEquals("Y\nOOOO\nOOOO\nOOOOOOOOOOO\nOOOO", format);
+
+	}
+
+	@Test
+	public void equalTest() {
+
+		BerlinDateFormat berlinClockTimeClone = (BerlinDateFormat) berlinClockTime.clone();
+
+		assertTrue(berlinClockTimeClone.equals(berlinClockTime));
 
 	}
 
