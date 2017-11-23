@@ -10,7 +10,7 @@ public class BerlinClockTime implements TimeConverter {
 
 
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-	private BerlinDateFormat berlinDateFormat = new BerlinDateFormat(true);
+	private BerlinDateFormat berlinDateFormat = new BerlinDateFormat(true, System.lineSeparator());
 
     @Override
     public String convertTime(String aTime) {

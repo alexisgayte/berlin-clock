@@ -21,11 +21,11 @@ public class BerlinDateFormatTest {
 
 	@Before
 	public void setup() throws Exception {
-		berlinClockTime = new BerlinDateFormat();
+		berlinClockTime = new BerlinDateFormat(false, "\n");
 	}
 
 	@Test
-	public void zeroHourTest() throws ParseException {
+	public void format_zero_hourTest() throws ParseException {
 
 		String format = berlinClockTime.format(new Date(0, 0, 0, 0, 0, 0));
 
@@ -33,7 +33,7 @@ public class BerlinDateFormatTest {
 	}
 
 	@Test
-	public void tenHourTest() throws ParseException {
+	public void format_ten_hourTest() throws ParseException {
 
 		String format = berlinClockTime.format(new Date(0, 0, 0, 10, 0, 0));
 
@@ -41,7 +41,7 @@ public class BerlinDateFormatTest {
 	}
 
 	@Test
-	public void tenTenTenTest() throws ParseException {
+	public void format_ten_ten_tenTest() throws ParseException {
 
 		String format = berlinClockTime.format(new Date(0, 0, 0, 10, 10, 10));
 
@@ -49,7 +49,7 @@ public class BerlinDateFormatTest {
 	}
 
 	@Test
-	public void normalTwentyFourHourTest() throws ParseException {
+	public void format_normal_twenty_four_hourTest() throws ParseException {
 
 		String format = berlinClockTime.format(new Date(0, 0, 0, 24, 0, 0));
 
@@ -57,13 +57,22 @@ public class BerlinDateFormatTest {
 	}
 
 	@Test
-	public void twentyFourHourSpecialLogicTest() throws ParseException {
+	public void format_twenty_four_hour_special_logicTest() throws ParseException {
 
-		berlinClockTime = new BerlinDateFormat(true);
+		berlinClockTime = new BerlinDateFormat(true, "\n");
 
 		String format = berlinClockTime.format(new Date(0, 0, 2, 0, 0, 0));
 
 		assertEquals("Y\nRRRR\nRRRR\nOOOOOOOOOOO\nOOOO", format);
+	}
+
+	@Test
+	public void format_special_line_separatorTest() {
+
+		berlinClockTime =  new BerlinDateFormat(false, "K");
+		String format = berlinClockTime.format(new Date(0, 0, 0, 0, 0, 0));
+
+		assertEquals("YKOOOOKOOOOKOOOOOOOOOOOKOOOO", format);
 	}
 
 	@Test(expected = NotImplementedException.class)

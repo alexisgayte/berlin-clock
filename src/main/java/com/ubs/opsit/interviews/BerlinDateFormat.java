@@ -16,16 +16,18 @@ public class BerlinDateFormat extends DateFormat {
 
 	final static int HOUR_FOR_THE_24_LOGIC = 24;
 	private boolean pairDay24hLogic;
+	private String lineSeparator;
 
 	public BerlinDateFormat() {
-		this(false);
+		this(false, System.lineSeparator());
 	}
 
-	public BerlinDateFormat(boolean pairDay24h) {
+	public BerlinDateFormat(boolean pairDay24h, String lineSeparator) {
 		super();
 		setCalendar(Calendar.getInstance());
 		setNumberFormat(NumberFormat.getInstance());
 		pairDay24hLogic = pairDay24h;
+		this.lineSeparator = lineSeparator;
 
 	}
 
@@ -41,13 +43,13 @@ public class BerlinDateFormat extends DateFormat {
 
 		// Check it out if we can use the time lib and java >7
 		toAppendTo	.append(formatSecondsRow(calendar.get(Calendar.SECOND)))
-					.append(System.lineSeparator())
+					.append(lineSeparator)
 					.append(formatHours1Row(calendar.get(Calendar.HOUR_OF_DAY)))
-					.append(System.lineSeparator())
+					.append(lineSeparator)
 					.append(formatHours2Row(calendar.get(Calendar.HOUR_OF_DAY)))
-					.append(System.lineSeparator())
+					.append(lineSeparator)
 					.append(formatMinutes1Row(calendar.get(Calendar.MINUTE)))
-					.append(System.lineSeparator())
+					.append(lineSeparator)
 					.append(formatMinutes2Row(calendar.get(Calendar.MINUTE)));
 		return toAppendTo;
 	}
